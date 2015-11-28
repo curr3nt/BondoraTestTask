@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{DB4AC014-E3B3-4821-BEB4-ED1B16983822}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendTcpService", "BackendTcpService\BackendTcpService.csproj", "{4A979D20-95AD-41A0-98E3-854B32B248DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendTcpService.Protocol", "BackendTcpService.Protocol\BackendTcpService.Protocol.csproj", "{7B72A571-FA23-45B8-AA56-454767A9D168}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplication", "TestApplication\TestApplication.csproj", "{95378D3F-4BD4-44FE-9CB9-EE2C3A984999}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB4AC014-E3B3-4821-BEB4-ED1B16983822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB4AC014-E3B3-4821-BEB4-ED1B16983822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB4AC014-E3B3-4821-BEB4-ED1B16983822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB4AC014-E3B3-4821-BEB4-ED1B16983822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A979D20-95AD-41A0-98E3-854B32B248DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A979D20-95AD-41A0-98E3-854B32B248DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A979D20-95AD-41A0-98E3-854B32B248DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A979D20-95AD-41A0-98E3-854B32B248DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B72A571-FA23-45B8-AA56-454767A9D168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B72A571-FA23-45B8-AA56-454767A9D168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B72A571-FA23-45B8-AA56-454767A9D168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B72A571-FA23-45B8-AA56-454767A9D168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95378D3F-4BD4-44FE-9CB9-EE2C3A984999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95378D3F-4BD4-44FE-9CB9-EE2C3A984999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95378D3F-4BD4-44FE-9CB9-EE2C3A984999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95378D3F-4BD4-44FE-9CB9-EE2C3A984999}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

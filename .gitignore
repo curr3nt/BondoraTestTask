@@ -1,0 +1,8 @@
+# VS output
+[Bb]in/
+[Oo]bj/
+# VS user files
+*.suo
+*.user
+# Nuget packages
+packages/
