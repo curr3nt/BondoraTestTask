@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class LoyaltyPoints
+    public enum InventoryType
     {
-        public string Customer { get; set; }
-        public decimal Points { get; set; }
+        Unknown = 0,
+        Regular = 1,
+        Heavy = 2,
+        Specialized = 3
     }
 }

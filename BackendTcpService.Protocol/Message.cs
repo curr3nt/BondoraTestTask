@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BackendTcpService.Protocol
 {
-    
+    [Serializable]
     public class Message
     {
         public DateTime Timestamp { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -86,10 +87,10 @@ namespace BackendTcpService
         }
 
         /// <summary>
-        /// Mehtod checks if object of type Message was indeed written to the stream by a client
+        /// Method checks if object of type Message was indeed written to the stream by a client
         /// </summary>
         /// <param name="stream"></param>
-        private void ProcessIncomingRequest(NetworkStream stream)
+        private void ProcessIncomingRequest(Stream stream)
         {
             var formatter = new BinaryFormatter();
             var receivedObject = formatter.Deserialize(stream);

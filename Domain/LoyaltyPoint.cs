@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class Fee
+    public class LoyaltyPoint
     {
         public int Id { get; set; }
-        public FeeType Type { get; set; }
-        public decimal FeeValue { get; set; }
+        public InventoryType InventoryType { get; set; }
+        public decimal Points { get; set; }
     }
 }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class Fee
+    public enum FeeType
     {
-        public int Id { get; set; }
-        public FeeType Type { get; set; }
-        public decimal FeeValue { get; set; }
+        Unknown = 0,
+        OneTime = 1,
+        PremiumDaily = 2,
+        RegularDaily = 3
     }
 }

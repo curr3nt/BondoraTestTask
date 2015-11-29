@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendTcpService.Protocol"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplication", "TestApplication\TestApplication.csproj", "{95378D3F-4BD4-44FE-9CB9-EE2C3A984999}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{E7AD700C-130A-44AD-8434-F819FBA32B0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{95378D3F-4BD4-44FE-9CB9-EE2C3A984999}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95378D3F-4BD4-44FE-9CB9-EE2C3A984999}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95378D3F-4BD4-44FE-9CB9-EE2C3A984999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7AD700C-130A-44AD-8434-F819FBA32B0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7AD700C-130A-44AD-8434-F819FBA32B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7AD700C-130A-44AD-8434-F819FBA32B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7AD700C-130A-44AD-8434-F819FBA32B0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

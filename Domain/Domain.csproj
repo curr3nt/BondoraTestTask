@@ -39,11 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeeType.cs" />
+    <Compile Include="InventoryType.cs" />
     <Compile Include="Fee.cs" />
     <Compile Include="Equipment.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="InvoiceRow.cs" />
-    <Compile Include="LoyaltyPoints.cs" />
+    <Compile Include="LoyaltyPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
