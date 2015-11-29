@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BackendTcpService.Protocol;
+using DTO;
 
-namespace BackendTcpService
+namespace BusinessLogic
 {
     public interface IBusinessService
     {
-        Message ProcessMessage(Message message);
+        ICollection<EquipmentDto> GetInventoryList();
+        InvoiceFileDto ConfirmCart(CartDto cart);
     }
 }

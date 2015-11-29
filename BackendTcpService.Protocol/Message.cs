@@ -10,6 +10,8 @@ namespace BackendTcpService.Protocol
     public class Message
     {
         public DateTime Timestamp { get; set; }
+        public MessageType Type { get; set; }
+        public MessageStatus Status { get; set; }
         public object Data { get; set; }
 
         public Message()

@@ -9,6 +9,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using BackendTcpService.Protocol;
+using BusinessLogic;
+using DTO;
 using NLog;
 
 namespace BackendTcpService
@@ -67,7 +69,7 @@ namespace BackendTcpService
                     client = listener.AcceptTcpClient();
                     Logger.Debug("Incoming connection from: " + client.Client.RemoteEndPoint);
                     stream = client.GetStream();
-                    ProcessIncomingRequest(stream);
+                    ProcessIncomingRequestAndSendResponse(stream);
 
                     stream.Close();
                     client.Close();
@@ -87,19 +89,73 @@ namespace BackendTcpService
         }
 
         /// <summary>
-        /// Method checks if object of type Message was indeed written to the stream by a client
+        /// Method checks if object of type Message was indeed written to the stream by a client,
+        /// creates a response Message.
         /// </summary>
         /// <param name="stream"></param>
-        private void ProcessIncomingRequest(Stream stream)
+        private void ProcessIncomingRequestAndSendResponse(Stream stream)
         {
+            var response = new Message();
+
             var formatter = new BinaryFormatter();
             var receivedObject = formatter.Deserialize(stream);
             var message = receivedObject as Message;
             if (message != null)
-                _service.ProcessMessage(message);
+            {
+                try
+                {
+                    response = ProcessMessage(message);
+                }
+                catch (Exception e)
+                {
+                    Logger.Error(e);
+                    response.Data = "An error has occured on the service-side";
+                    response.Status = MessageStatus.Error;
+                }
+            }
             else
-                Logger.Warn("Received unknown object; Type: {0}, ToString(): {1}",
+            {
+                var errorMessage = string.Format("Received unknown object; Type: {0}, ToString(): {1}",
                     receivedObject.GetType(), receivedObject);
+                Logger.Warn(errorMessage);
+                response.Data = errorMessage;
+                response.Status = MessageStatus.Error;
+            }
+
+            formatter.Serialize(stream, response);
+        }
+
+        private Message ProcessMessage(Message message)
+        {
+            var response = new Message();
+            switch (message.Type)
+            {
+                case MessageType.GetInventory:
+                    // get equipment list
+                    response.Data = _service.GetInventoryList();
+                    response.Status = MessageStatus.Success;
+                    break;
+                case MessageType.ConfirmCart:
+                    // create invoice, calculate prices and loyalty points
+                    var cart = message.Data as CartDto;
+                    if (cart != null)
+                    {
+                        response.Data = _service.ConfirmCart(cart);
+                        response.Status = MessageStatus.Success;
+                    }
+                    else
+                    {
+                        response.Data = string.Format("Message data is unknown; Type: {0}, ToString(): {1}",
+                            message.Data.GetType(), message.Data);
+                        response.Status = MessageStatus.Error;
+                    }
+                    break;
+                default:
+                    response.Data = string.Format("Unknown message type: {0}", message.Type);
+                    response.Status = MessageStatus.Error;
+                    break;
+            }
+            return response;
         }
     }
 }
