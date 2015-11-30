@@ -1,0 +1,50 @@
+﻿@model ICollection<DTO.EquipmentDto>
+
+@{
+    ViewBag.Title = "Equipment list";
+}
+
+<div class="inventory">
+    <table class="table table-bordered">
+        <tr><th>Equipment name</th><th>Number of rental days</th><th></th></tr>
+        @foreach (var equipmentDto in Model)
+        {
+            <tr class="equipment">
+                <td>@equipmentDto.Name</td>
+                <td class="col-md-2">
+                    <input type="text" class="form-control days" />
+                </td>
+                <td class="col-md-1">
+                    <button class="btn btn-default addToCart">Add to cart</button>
+                    <input type="hidden" value="@equipmentDto.Id" class="equipmentId" />
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $(function() {
+            $('.inventory').on('click', '.addToCart', function() {
+                var $equipment = $(this).closest('.equipment');
+                var $daysEl = $equipment.find('.days');
+                var days = $daysEl.val();
+                var id = $equipment.find('.equipmentId').val();
+                $.getJSON('@Url.Action("AddToCart", "Cart")', {
+                    equipmentId: id,
+                    daysRented: days
+                }, function (response) {
+                    var $element;
+                    if (response) {
+                        $element = getAlertElement("success", "Added equipment to cart");
+                        $daysEl.val('');
+                        $('.cartSize').text(response);
+                    }
+                    else
+                        $element = getAlertElement("danger", "Please check number of days value and try again");
+                    addOrReplaceAlert($element, $equipment.closest('.container'));
+                });
+            });
+        });
+    </script>
+}

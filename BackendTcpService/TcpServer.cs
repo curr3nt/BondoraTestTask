@@ -96,7 +96,7 @@ namespace BackendTcpService
         private void ProcessIncomingRequestAndSendResponse(Stream stream)
         {
             var response = new Message();
-
+            // accept Message
             var formatter = new BinaryFormatter();
             var receivedObject = formatter.Deserialize(stream);
             var message = receivedObject as Message;
@@ -121,7 +121,7 @@ namespace BackendTcpService
                 response.Data = errorMessage;
                 response.Status = MessageStatus.Error;
             }
-
+            // send Message
             formatter.Serialize(stream, response);
         }
 
