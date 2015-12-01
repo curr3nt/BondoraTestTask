@@ -7,6 +7,7 @@ using System.Web.Routing;
 using DTO;
 using Frontend.BackendWrapper;
 using Frontend.CustomExceptions;
+using Frontend.Properties;
 
 namespace Frontend.Controllers
 {
@@ -17,7 +18,9 @@ namespace Frontend.Controllers
 
         protected ABaseController()
         {
-            Service = new BackendTcpServiceWrapper("127.0.0.1", 55007);
+            var ip = Settings.Default.ServerIp;
+            var port = Settings.Default.ServerPort;
+            Service = new BackendTcpServiceWrapper(ip, port);
         }
 
         protected ICollection<EquipmentDto> GetAndCacheInventoryList()
