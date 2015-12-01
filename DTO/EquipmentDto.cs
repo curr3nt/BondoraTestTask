@@ -13,5 +13,7 @@ namespace DTO
         public int Id { get; set; }
         [DisplayName("Equipment name")]
         public string Name { get; set; }
+        [DisplayName("Equipment type")]
+        public string Type { get; set; }
     }
 }

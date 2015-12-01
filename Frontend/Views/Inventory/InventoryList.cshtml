@@ -11,6 +11,7 @@
         <tr>
             @* Some failure with annotations here, this is another model from where those annotations were defined *@
             <th>Equipment name</th>
+            <th>Equipment type</th>
             <th>Number of rental days</th>
             <th></th>
         </tr>
@@ -18,6 +19,7 @@
         {
             <tr class="equipment">
                 <td>@equipmentDto.Name</td>
+                <td>@equipmentDto.Type</td>
                 <td class="col-md-2">
                     <input type="text" class="form-control days" />
                 </td>

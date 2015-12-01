@@ -128,6 +128,8 @@ namespace BackendTcpService
         private Message ProcessMessage(Message message)
         {
             var response = new Message();
+            Logger.Info("Request action: {0}", message.Type);
+            Logger.Debug("Request data: {0}", message.Data);
             switch (message.Type)
             {
                 case MessageType.GetInventory:

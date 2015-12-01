@@ -68,6 +68,16 @@ namespace Frontend.Controllers
 
         public ActionResult ConfirmCart(CartDto cart)
         {
+            // check for second submission
+            if (Session[CartKey] == null)
+            {
+                TempData["ErrorMessage"] = "Already submitted this cart; invoice has already been generated";
+                return RedirectToAction("DisplayCart");
+            }
+
+            // dropping cart reference here to prevent double submission
+            Session[CartKey] = null;
+
             if (cart.Rows == null || cart.Rows.Count == 0)
             {
                 TempData["ErrorMessage"] = "Submitted an empty cart";

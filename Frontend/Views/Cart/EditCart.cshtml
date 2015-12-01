@@ -13,6 +13,7 @@
     var firstRow = Model.Rows.FirstOrDefault();
     
     <div class="form-group">
+        <input type="hidden" name="rows.Index" value="idx" />
         <table class="table table-bordered">
             <tr>
                 <th>@Html.LabelFor(m => firstRow.EquipmentName)</th>
@@ -21,11 +22,16 @@
             @for (var i = 0; i < Model.Rows.Count; i++)
             {
                 <tr>
-                    <td>@Model.Rows[i].EquipmentName</td>
+                    <td>
+                        @Model.Rows[i].EquipmentName
+                        <input type="hidden" name="rows.Index" value="@i" />
+                    </td>
                     <td class="col-md-2">
                         @Html.TextBoxFor(m => Model.Rows[i].DaysRented, new
                         {
-                            @class="form-control", @readonly = "readonly", @name = string.Format("row[{0}].DaysRented", i)
+                            @class="form-control", 
+                            @readonly = "readonly", 
+                            @name = string.Format("row[{0}].DaysRented", i)
                         })
                         @Html.HiddenFor(m => Model.Rows[i].EquipmentId, new
                         {
@@ -42,7 +48,7 @@
         @Html.ValidationMessageFor(model => model.CustomerName)
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Confirm</button>
     <a href="@Url.Action("ClearCart", "Cart")" class="btn btn-warning">Clear cart</a>
     <a href="@Url.Action("List", "Inventory")" class="btn btn-default">Back</a>
 }

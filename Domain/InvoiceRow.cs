@@ -25,6 +25,10 @@ namespace Domain
                 _rentedDays = (EndDate - StartDate).Days;
                 return _rentedDays;
             }
+            set
+            {
+                _rentedDays = value;
+            }
         }
 
         public virtual Invoice Invoice { get; set; }

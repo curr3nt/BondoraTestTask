@@ -21,7 +21,12 @@ namespace BusinessLogic
             {
                 var equipments = context.Equipments;
 
-                var equipmentDtos = equipments.Select(eq => new EquipmentDto {Id = eq.Id, Name = eq.Name}).ToList();
+                var equipmentDtos = equipments.Select(eq => new EquipmentDto
+                {
+                    Id = eq.Id, 
+                    Name = eq.Name, 
+                    Type = eq.Type.ToString()
+                }).ToList();
                 
                 return equipmentDtos;
             }
