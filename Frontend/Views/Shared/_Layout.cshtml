@@ -31,7 +31,7 @@
           </ul>
             <ul class="nav navbar-nav navbar-right">
                 @{ var cartSize = Session["cart"] != null ? ((CartDto) Session["cart"]).Rows.Count : 0; }
-                <li><a href="#">Cart (<span class="cartSize">@cartSize</span>)</a></li>
+                <li><a href="@Url.Action("DisplayCart", "Cart")"0>Cart (<span class="cartSize">@cartSize</span>)</a></li>
             </ul>
         </div>
       </div>

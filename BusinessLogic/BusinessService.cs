@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,8 @@ namespace BusinessLogic
             using (var context = new DalContext())
             {
                 var invoice = SaveInvoice(cart, context);
-                
+                // if code wont call this DbSet, all lazy requests for InvoiceRow.Equipment property will return null
+                var equipments = context.Equipments.ToList();
                 var fees = context.Fees.ToDictionary(f => f.Type, f => f);
                 fileDto = PrepareInvoiceFile(invoice, fees);
             }
@@ -55,6 +57,7 @@ namespace BusinessLogic
             context.Invoices.Add(invoice);
             context.SaveChanges();
 
+            invoice = context.Invoices.Single(inv => inv.Id == invoice.Id);
             return invoice;
         }
 
@@ -91,11 +94,15 @@ namespace BusinessLogic
         /// <returns></returns>
         private InvoiceFileDto PrepareInvoiceFile(Invoice invoice, IDictionary<FeeType, Fee> fees)
         {
-            var fileDto = new InvoiceFileDto();
+            var fileDto = new InvoiceFileDto
+            {
+                InvoiceNumber = invoice.Number,
+                FileRows = new List<string>()
+            };
 
             const string invoiceHeader = "Invoice";
             var number = string.Format("Number,{0}", invoice.Number);
-            var date = string.Format("Date,{0}", invoice.Date);
+            var date = string.Format("Date,{0}", invoice.Date.ToString("dd.MM.yyyy HH:mm:ss"));
             var customer = string.Format("Customer,{0}", invoice.Customer);
             AddToInvoiceFile(true, fileDto, invoiceHeader, number, date, customer);
 
@@ -103,14 +110,17 @@ namespace BusinessLogic
             const string rowsDescription = "Equipments,Days rented,Price";
             AddToInvoiceFile(false, fileDto, rowsHeader, rowsDescription);
             
-            var rowStrs = invoice.Rows.Select(row => 
-                string.Format("{0},{1},{2}", row.RentedEquipment, row.RentedDays, row.GetRowPrice(fees))).ToArray();
+            // using invariant culture renders decimals with '.' - useful distinction in .csv files
+            var rowStrs = invoice.Rows.Select(row =>
+                string.Format("{0},{1},{2}", row.Equipment.Name, row.RentedDays, 
+                    row.GetRowPrice(fees).ToString(CultureInfo.InvariantCulture))).ToArray();
             AddToInvoiceFile(true, fileDto, rowStrs);
 
             const string bottomHeader = "Total";
-            var totalPrice = string.Format("Price,{0}", invoice.GetInvoicePrice());
+            var totalPrice = string.Format("Price,{0}", 
+                invoice.GetInvoicePrice().ToString(CultureInfo.InvariantCulture));
             var points = string.Format("Loyalty points,{0}", invoice.GetInvoiceLoyaltyPoints());
-            AddToInvoiceFile(true, fileDto, bottomHeader, totalPrice, points);
+            AddToInvoiceFile(false, fileDto, bottomHeader, totalPrice, points);
 
             return fileDto;
         }

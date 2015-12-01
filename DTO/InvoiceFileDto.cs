@@ -9,6 +9,7 @@ namespace DTO
     [Serializable]
     public class InvoiceFileDto
     {
+        public string InvoiceNumber { get; set; }
         public ICollection<string> FileRows { get; set; }
     }
 }

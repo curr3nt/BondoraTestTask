@@ -28,7 +28,7 @@ namespace Domain
         }
 
         public virtual Invoice Invoice { get; set; }
-        public virtual Equipment RentedEquipment { get; set; }
+        public virtual Equipment Equipment { get; set; }
 
         private decimal _price;
         
@@ -45,7 +45,7 @@ namespace Domain
                 && availableFees.ContainsKey(FeeType.RegularDaily)))
                 throw new Exception("Not all required fees have been passed");
             
-            switch (RentedEquipment.Type)
+            switch (Equipment.Type)
             {
                 case InventoryType.Heavy:
                     _price = availableFees[FeeType.OneTime].FeeValue +
@@ -81,7 +81,7 @@ namespace Domain
 
         public int GetRowLoyaltyPoints()
         {
-            switch (RentedEquipment.Type)
+            switch (Equipment.Type)
             {
                 case InventoryType.Heavy:
                     return 2;

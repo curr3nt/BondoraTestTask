@@ -39,6 +39,22 @@ namespace Frontend.BackendWrapper
             return inventory;
         }
 
+        public InvoiceFileDto ConfirmCart(CartDto cart)
+        {
+            var message = new Message();
+            message.Type = MessageType.ConfirmCart;
+            message.Data = cart;
+
+            var response = SendAndReceiveMessage(message);
+
+            var invoiceFile = response.Data as InvoiceFileDto;
+
+            if (invoiceFile == null)
+                throw new BackendUnexpectedResponseDataException();
+
+            return invoiceFile;
+        }
+
         private Message SendAndReceiveMessage(Message message)
         {
             TcpClient client = null;

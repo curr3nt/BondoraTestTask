@@ -1,0 +1,56 @@
+﻿@using DTO
+@model DTO.CartDto
+
+@{
+    ViewBag.Title = "Confirm cart";
+}
+
+<h2>Confirm cart</h2>
+
+@using (Html.BeginForm("ConfirmCart", "Cart", FormMethod.Post)) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    var firstRow = Model.Rows.FirstOrDefault();
+    
+    <div class="form-group">
+        <table class="table table-bordered">
+            <tr>
+                <th>@Html.LabelFor(m => firstRow.EquipmentName)</th>
+                <th class="col-md-2">@Html.LabelFor(m => firstRow.DaysRented)</th>
+            </tr>
+            @for (var i = 0; i < Model.Rows.Count; i++)
+            {
+                <tr>
+                    <td>@Model.Rows[i].EquipmentName</td>
+                    <td class="col-md-2">
+                        @Html.TextBoxFor(m => Model.Rows[i].DaysRented, new
+                        {
+                            @class="form-control", @readonly = "readonly", @name = string.Format("row[{0}].DaysRented", i)
+                        })
+                        @Html.HiddenFor(m => Model.Rows[i].EquipmentId, new
+                        {
+                            @name = string.Format("row[{0}].EquipmentId", i)
+                        })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CustomerName)
+        @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.CustomerName)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="@Url.Action("ClearCart", "Cart")" class="btn btn-warning">Clear cart</a>
+    <a href="@Url.Action("List", "Inventory")" class="btn btn-default">Back</a>
+}
+
+<div>
+    
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

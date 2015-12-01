@@ -10,5 +10,6 @@ namespace Frontend.BackendWrapper
     public interface IBackendServiceWrapper
     {
         ICollection<EquipmentDto> GetInventory();
+        InvoiceFileDto ConfirmCart(CartDto cart);
     }
 }

@@ -11,11 +11,14 @@ namespace DAL
 {
     public class DalContext : DbContext
     {
-
-        //public DalContext()
-        //    : base("DalContext")
-        //{
-        //}
+        /// <summary>
+        /// This EF's DbContext wrapper uses the lazy loading for loading related entities
+        /// </summary>
+        public DalContext()
+            : base("DalContext")
+        {
+            Configuration.LazyLoadingEnabled = true;
+        }
         
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Fee> Fees { get; set; }

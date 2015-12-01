@@ -4,9 +4,16 @@
     ViewBag.Title = "Equipment list";
 }
 
+<h2>Equipment list</h2>
+
 <div class="inventory">
     <table class="table table-bordered">
-        <tr><th>Equipment name</th><th>Number of rental days</th><th></th></tr>
+        <tr>
+            @* Some failure with annotations here, this is another model from where those annotations were defined *@
+            <th>Equipment name</th>
+            <th>Number of rental days</th>
+            <th></th>
+        </tr>
         @foreach (var equipmentDto in Model)
         {
             <tr class="equipment">
