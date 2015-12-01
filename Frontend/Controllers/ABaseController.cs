@@ -17,7 +17,7 @@ namespace Frontend.Controllers
 
         protected ABaseController()
         {
-            Service = new BackendTcpServiceWrapper("127.0.0.1", 10001);
+            Service = new BackendTcpServiceWrapper("127.0.0.1", 55007);
         }
 
         protected ICollection<EquipmentDto> GetAndCacheInventoryList()

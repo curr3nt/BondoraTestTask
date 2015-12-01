@@ -14,7 +14,6 @@ namespace Frontend.BackendWrapper
 {
     public class BackendTcpServiceWrapper : IBackendServiceWrapper
     {
-        // TODO: move ip / port to settings
         private readonly string _address;
         private readonly int _port;
 

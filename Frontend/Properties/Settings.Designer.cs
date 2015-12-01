@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BackendTcpService.Properties {
+namespace Frontend.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
